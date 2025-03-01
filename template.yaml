@@ -1,0 +1,26 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: FastAPI on AWS Lambda with GET and POST
+
+Resources:
+  FastAPIFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: main.handler
+      Runtime: python3.9
+      CodeUri: .
+      MemorySize: 512
+      Timeout: 30
+      Policies:
+        - AWSLambdaBasicExecutionRole
+      Events:
+        GetRoot:
+          Type: Api
+          Properties:
+            Path: /
+            Method: GET
+        PostItem:
+          Type: Api
+          Properties:
+            Path: /items/
+            Method: POST
